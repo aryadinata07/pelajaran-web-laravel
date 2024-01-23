@@ -2,6 +2,14 @@
 
 @section('content')
     <h1>Ini adalah halaman student</h1>
+   <a href="/student/create" class="btn btn-primary mb-3">ADD data</a>
+
+   @if (session()->has('success'))
+    <div class="alert alert-success col-lg-12" role="alert">
+        {{ session('success') }}
+    </div>
+   @endif
+
     <table class="table table-striped table-bordered">
         <thead>
             <tr class="table-dark">
@@ -21,8 +29,12 @@
                     <td>{{ $student['alamat'] }}</td>
                     <td> 
                             <a href= "/student/detail/{{ $student->id }}" class="btn btn-primary">Detail</a>
-                            <button type="button" class="btn btn-warning">Edit</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <a href="/student/edit/{{ $student->id }}" class="btn btn-warning">Edit</a>
+                            <form action="/student/delete/{{ $student->id }}" method="post" class="d-inline">
+                            @method('delete')
+                            @csrf
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this student?')">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

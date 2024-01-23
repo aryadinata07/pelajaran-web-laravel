@@ -20,7 +20,7 @@
             <input type="text" class="form-control" name="kelas" id="kelas" value="{{ $student->kelas }}" disabled>
         </div>
         <div class="text-center"> 
-        <button type="button" class="btn btn-primary btn-lg">Back</button>
+        <a href="/student/all" class="btn btn-primary btn-lg">Back</a>
     </div>
     </div>
 

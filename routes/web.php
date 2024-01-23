@@ -37,12 +37,14 @@ Route::get('/about', function () {
     ]);
 });
 
-Route::get('/student', [StudentsController::class, 'index']); 
-
 Route::get('/extra', [extracurricularCtr::class, 'index']); 
 
-Route::get('/student/detail/{student}', [StudentsController::class, 'show']);
-
-
-
-
+Route::group(['prefix' => '/student'], function () {
+    Route::get('/all', [StudentsController::class, 'index']);
+    Route::get('/detail/{student}', [StudentsController::class, 'show']);
+    Route::get('/create', [StudentsController::class, 'create']);
+    Route::post('/add', [StudentsController::class, 'store']); 
+    Route::delete('/delete/{student}', [StudentsController::class, 'destroy']);
+    Route::get('/edit/{student}', [StudentsController::class, 'edit']);
+    Route::put('/update/{student}', [StudentsController::class, 'update']);
+});

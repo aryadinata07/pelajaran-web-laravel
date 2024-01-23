@@ -14,4 +14,8 @@ class extracurricularCtr extends Controller
             "extracurricular" => extracurricular::all()
         ]);
     }
+
+    public function create (){
+        
+    }
 }
