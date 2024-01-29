@@ -18,8 +18,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/extra">Ekstra</a>
         </li>
-       
-       
+        <li class="nav-item">
+          <a class="nav-link" href="/kelas">Kelas</a>
+        </li>     
         
       </ul>
       <form class="d-flex" role="search">

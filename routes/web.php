@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Students;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\extracurricularCtr;
-
+use App\Http\Controllers\kelasController;
 
 
 /*
@@ -47,4 +47,15 @@ Route::group(['prefix' => '/student'], function () {
     Route::delete('/delete/{student}', [StudentsController::class, 'destroy']);
     Route::get('/edit/{student}', [StudentsController::class, 'edit']);
     Route::put('/update/{student}', [StudentsController::class, 'update']);
+});
+
+
+Route::group(['prefix' => 'kelas'], function () {
+    Route::get('/', [KelasController::class, 'index']);
+    Route::get('/create', [KelasController::class, 'create']);
+    Route::post('/store', [KelasController::class, 'store']);
+    Route::get('/edit/{id}', [KelasController::class, 'edit']);
+    Route::patch('/update/{id}', [KelasController::class, 'update']);
+    Route::delete('/destroy/{id}', [KelasController::class, 'destroy']);
+    Route::get('/detail/{id}', [KelasController::class, 'detail'])->name('kelas.detail');
 });

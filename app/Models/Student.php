@@ -9,6 +9,11 @@ class Student extends Model
 {
     use HasFactory;
 
+    public function student()
+    {
+        return $this->hasMany(student::class);
+    }
+
     protected $guarded = ['id'];
 
     protected $fillable = ['nis', 'nama', 'kelas', 'tanggal_lahir', 'alamat'];

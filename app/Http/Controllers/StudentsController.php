@@ -24,6 +24,7 @@ class StudentsController extends Controller
     public function create(){
         return view('student.create',[
             "title" => "New Data Student",
+            "grade" => student::all()
         ]);
     }
 
