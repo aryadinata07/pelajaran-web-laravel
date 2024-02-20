@@ -1,7 +1,7 @@
-@extends('layout.main')
+@extends('dashboard.app')
 
 @section('content')
-    <h2>Student Detail</h2>
+<h2>Student Detail</h2>
     <div class="form">
         <div class="form-group">
             <label for="">NIS</label>
@@ -20,8 +20,7 @@
             <input type="text" class="form-control" name="kelas" id="kelas" value="{{ $student->kelas }}" disabled>
         </div>
         <div class="text-center"> 
-        <a href="/student" class="btn btn-primary btn-lg">Back</a>
+        <a href="/dashboard" class="btn btn-primary btn-lg">Back</a>
     </div>
     </div>
-
-    @endsection
+@endsection

@@ -1,30 +1,42 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Kelas;
 
-class StudentsController extends Controller
+use Illuminate\Http\Request;
+
+class dashboardStudentController extends Controller
 {
-    public static function index(){
-        return view('student/all', [
-            "title" => "student",
-            "students" => Student::all()
+    public function index(Request $request)
+    {
+        $searchQuery = $request->input('search');
+
+        $students = Student::query();
+    
+        if ($searchQuery) {
+            $students->where('nama', 'like', '%' . $searchQuery . '%')
+                     ->orWhere('nis', 'like', '%' . $searchQuery . '%');
+        }
+    
+        $students = $students->get();
+    
+        return view('dashboard.student.index', [
+            'title' => 'Student List',
+            'students' => $students,
         ]);
     }
-
+    
     public function show($student){
-        return view('student.detail',[
+        return view('dashboard.student.detail',[
             "title" => "detail.student",
             "student" => Student::find($student)
         ]);
     }
 
+
     public function create(){
-        return view('student.create',[
-            "title" => "New Data Student",
+        return view('dashboard.student.create',[
             "student" => student::all(),
             "grade" => Kelas::all()
         ]);
@@ -39,19 +51,7 @@ class StudentsController extends Controller
             'alamat' => 'required'
         ]);
         Student::create($validateData);
-        return redirect('/student/all')-> with('success', 'Data siswa berhasil di tambahkan');
-        
-    }
-
-    public function destroy($student)
-    {
-        $student = Student::destroy($student);
-
-        if (!$student) {
-            return redirect('/student/all')->with('error', 'Student not found');
-        }
-
-        return redirect('/student/all')->with('success', 'Student deleted successfully');
+        return redirect('/dashboard/student')-> with('success', 'Data siswa berhasil di tambahkan');     
     }
 
     public function edit($studentId)
@@ -59,11 +59,10 @@ class StudentsController extends Controller
         $student = Student::find($studentId);
 
         if (!$student) {
-            return redirect('/student/all')->with('error', 'Student not found');
+            return redirect('/dashboard/student')->with('error', 'Student not found');
         }
         
-
-        return view('student.edit', [
+        return view('dashboard.student.edit', [
             'title' => 'Edit Student',
             'student' => $student,
             "grade" => Kelas::all()
@@ -83,13 +82,25 @@ class StudentsController extends Controller
         $student = Student::find($studentId);
 
         if (!$student) {
-            return redirect('/student/all')->with('error', 'Student not found');
+            return redirect('/dashboard/student')->with('error', 'Student not found');
         }
 
         $student->update($validateData);
 
-        return redirect('/student/all')->with('success', 'Student updated successfully');
+        return redirect('/dashboard/student')->with('success', 'Student updated successfully');
     }
+
+    public function destroy($student)
+    {
+        $student = Student::destroy($student);
+
+        if (!$student) {
+            return redirect('/dashboard')->with('error', 'Student not found');
+        }
+
+        return redirect('/dashboard')->with('success', 'Student deleted successfully');
+    }
+
 
 
 }

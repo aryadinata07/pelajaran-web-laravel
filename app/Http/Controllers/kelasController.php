@@ -67,15 +67,4 @@ class KelasController extends Controller
 
         return redirect('/kelas')->with('success', 'Kelas updated successfully');
     }
-
-    public function detail($id)
-    {
-        $kelas = Kelas::find($id);
-
-        if (!$kelas) {
-            return redirect('/kelas')->with('error', 'Kelas not found');
-        }
-
-        return view('kelas.detail', ['title' => 'Kelas Detail', 'kelas' => $kelas]);
-    }
 }

@@ -15,14 +15,15 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id(); 
-            $table->integer('nis') -> unique();
+            $table->integer('nis')->unique();
             $table->string('nama'); 
-            $table->foreignId('kelas'); 
+            $table->string('kelas'); 
             $table->date('tanggal_lahir'); 
             $table->string('alamat'); 
             $table->timestamps(); 
         });
     }
+    
 
     /**
      * Reverse the migrations.

@@ -1,9 +1,7 @@
-@extends('layout.main')
+@extends('dashboard.app')
 
 @section('content')
-  <h1>{{$title}}</h1>
-
-  <form method="post" action="/student/add">
+<form method="post" action="/dashboard/student/add">
     @csrf
     <div class="mb-3">
       <label for="nis" class="form-label">NIS</label>

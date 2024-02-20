@@ -1,11 +1,11 @@
-@extends('layout.main')
+@extends('dashboard.app')
 
 @section('content')
   <h1>Edit Student</h1>
 
-  <form method="POST" action="/student/update/{{ $student->id }}">
+  <form method="POST" action="/dashboard/student/update/{{ $student->id }}">
     @csrf
-    @method('PUT')
+    @method('PATCH')
     <div class="form">
       <div class="form-group">
         <label for="nis">NIS</label>
@@ -33,7 +33,7 @@
         <label for="alamat">Address</label>
         <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $student->alamat }}">
       </div>
-      <div class="text-center"> 
+      <div class="mt-2 d-flex justify-content-center"> 
         <button type="submit" class="btn btn-primary btn-lg">Edit</button>
       </div>
     </div>
